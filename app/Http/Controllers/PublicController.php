@@ -10,6 +10,7 @@ use App\User;
 use App\Receipt;
 use App\Download;
 use App\Photo;
+use App\Coupon;
 
 use App\Mail\FormSubmited;
 
@@ -138,9 +139,17 @@ class PublicController extends Controller
     		$receipt->store_name = $request->input('store_name');
     		$receipt->contact_accept = implode(',', $contact_accept);
     		$receipt->nominal = $request->input('nominal');
-	        $receipt->unique_code = $city_id . substr(str_shuffle("ABCDEFGHIJKLMNOPQRSTUVWXYZ"), -7);
+	        // $receipt->unique_code = $city_id . substr(str_shuffle("ABCDEFGHIJKLMNOPQRSTUVWXYZ"), -7);
 
 	        if ($receipt->save()) {
+
+                $coupon_num = floor($receipt->nominal / 750000);
+                for ($i=1; $i <= $coupon_num; $i++) { 
+                    $coupon = new Coupon;
+                    $coupon->receipt_id = $receipt->id;
+                    $coupon->coupon_code = $receipt->city_id . substr(str_shuffle("ABCDEFGHIJKLMNOPQRSTUVWXYZ"), -7);
+                    $coupon->save();
+                }
 
                 foreach ($request->images as $photo) {
 

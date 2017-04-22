@@ -248,13 +248,15 @@
 																<tr>
 																	<td align="center" valign="top" class="textContent">
 																		<p style="color:#FFFFFF;line-height:100%;font-family:Helvetica,Arial,sans-serif;font-size:16px;font-weight:normal;margin-bottom:40px;text-align:center;">Selamat Anda mendapat satu nomor undian Dulux #WarnaKemenangan dan berkesempatan memenangkan hadiah utama paket wisata ke Dubai dari Dulux.</p>
+																		@foreach($coupons as $item)
 																		<h2 style="text-align: center;
 font-weight: bolder;font-family: Helvetica,Arial,sans-serif;font-size: 28px;margin-bottom: 10px;color: #002a68;line-height: 135%;width: 220px;border: 2px solid #e0e0e0;border-top-right-radius: 10px;border-bottom-left-radius: 10px;padding: 6px 4px;background: -webkit-gradient(linear, left top, left bottom, color-stop(1.00, #ff4800), color-stop(0.96, #ff5a11), color-stop(0.00, #fff005));
 background: -webkit-linear-gradient(top, #fffaaf 0%, #e0ba18 96%, #eddb13 100%);
 background: -moz-linear-gradient(top, #fffaaf 0%, #e0ba18 96%, #eddb13 100%);
 background: -o-linear-gradient(top, #fffaaf 0%, #e0ba18 96%, #eddb13 100%);
 background: -ms-linear-gradient(top, #fffaaf 0%, #e0ba18 96%, #eddb13 100%);
-background: linear-gradient(to bottom, #fffaaf 0%, #e0ba18 96%, #eddb13 100%);">{{ $unique_code }}</h2>
+background: linear-gradient(to bottom, #fffaaf 0%, #e0ba18 96%, #eddb13 100%);">{{ $item->coupon_code }}</h2>
+																		@endforeach
 																	</td>
 																</tr>
 															</table>

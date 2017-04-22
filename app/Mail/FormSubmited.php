@@ -8,6 +8,7 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
 use App\Receipt;
+use App\Coupon;
 
 class FormSubmited extends Mailable
 {
@@ -32,12 +33,11 @@ class FormSubmited extends Mailable
      */
     public function build()
     {
+        $coupons = Coupon::where('receipt_id', $this->receipt->id)->get();
         return $this->from('no-reply@letscolourindonesia.com')
             ->from('noreply.dulux@gmail.com', 'Lets Colour Indonesia')
             ->subject('Nomor Undian Warna Warni Kemenanganmu')
             ->view('emails.form-submited')
-            ->with([
-                'unique_code' => $this->receipt->unique_code,
-            ]);
+            ->with('coupons', $coupons);
     }
 }
