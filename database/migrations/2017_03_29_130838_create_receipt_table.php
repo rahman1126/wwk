@@ -29,7 +29,7 @@ class CreateReceiptTable extends Migration
             //$table->string('picture');
             $table->string('nominal', 100);
 
-            $table->string('unique_code', 20);
+            $table->string('unique_code', 255);
 
             $table->timestamps();
         });
