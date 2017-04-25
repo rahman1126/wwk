@@ -62,6 +62,7 @@
 
 				<div class="form-group {{ ( $errors->has('email') ? 'has-error' : '' ) }}"">
 					<input type="email" name="email" class="form-control" value="{{ old('email') }}" placeholder="Email *">
+					<small><i>Pastikan alamat email yang digunakan aktif. Nomor undian akan dikirimkan ke email Anda.</i></small>
 					@if($errors->has('email'))
 					<label class="help-block">
 						<strong>{{ $errors->first('email') }}</strong>
@@ -133,7 +134,7 @@
 			</div>
 			<div class="col-md-6 col-lg-6">
 				<div class="form-group">
-					<h4 style="margin-bottom: 25px; font-size: 16px;">Bersedia menerima informasi program melalui:</h4>
+					<h4 style="margin-bottom: 25px; font-size: 16px;">Bersedia menerima informasi program lainnya melalui:</h4>
 					<div class="checkbox">
 					  <label>
 					    <input type="checkbox" name="contact_accept[]" id="optionsRadios1" value="sms" {{ ( old('contact_accept') == 'sms' ? 'checked' : '' ) }}>
