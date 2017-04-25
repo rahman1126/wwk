@@ -162,7 +162,7 @@
 				</div>
 				<div class="form-group">
 					<div class="row">
-						<div class="col-xs-6 col-sm-4">
+						<div class="col-xs-6 col-sm-6">
 							<div id="uploading">
 								<div class="upload-box" id="uploadBtn1">
 									<img src="{{ asset('img/upload.png') }}" class="img-responsive upload-placeholder" id="imgPlaceholder1">
@@ -170,7 +170,7 @@
 								<input type="file" name="images[]" id="file1" accept="image/*" style="display: none">
 							</div>
 						</div>
-						<div class="col-xs-6 col-sm-4">
+						<div class="col-xs-6 col-sm-6">
 							<div id="uploading">
 								<div class="upload-box" id="uploadBtn2">
 									<img src="{{ asset('img/upload.png') }}" class="img-responsive upload-placeholder" id="imgPlaceholder2">
@@ -178,12 +178,20 @@
 								<input type="file" name="images[]" id="file2" accept="image/*" style="display: none">
 							</div>
 						</div>
-						<div class="col-xs-6 col-sm-4">
+						<div class="col-xs-6 col-sm-6">
 							<div id="uploading">
 								<div class="upload-box" id="uploadBtn3">
 									<img src="{{ asset('img/upload.png') }}" class="img-responsive upload-placeholder" id="imgPlaceholder3">
 								</div>
 								<input type="file" name="images[]" id="file3" accept="image/*" style="display: none">
+							</div>
+						</div>
+						<div class="col-xs-6 col-sm-6">
+							<div id="uploading">
+								<div class="upload-box" id="uploadBtn4">
+									<img src="{{ asset('img/upload.png') }}" class="img-responsive upload-placeholder" id="imgPlaceholder4">
+								</div>
+								<input type="file" name="images[]" id="file4" accept="image/*" style="display: none">
 							</div>
 						</div>
 					</div>
@@ -263,6 +271,18 @@
 	    }
 	}
 
+	function readURL4(input) {
+	    if (input.files && input.files[0]) {
+	        var reader = new FileReader();
+
+	        reader.onload = function (e) {
+	            $('#imgPlaceholder4').attr('src', e.target.result);
+	        }
+
+	        reader.readAsDataURL(input.files[0]);
+	    }
+	}
+
 	$("#file1").change(function(){
 	    readURL1(this);
 	});
@@ -275,6 +295,10 @@
 	    readURL3(this);
 	});
 
+	$("#file4").change(function(){
+	    readURL4(this);
+	});
+
 	$("#uploadBtn1").click(function() {
 	  $("#file1").click();
 	});
@@ -285,6 +309,10 @@
 
 	$("#uploadBtn3").click(function() {
 	  $("#file3").click();
+	});
+
+	$("#uploadBtn4").click(function() {
+	  $("#file4").click();
 	});
 
 
