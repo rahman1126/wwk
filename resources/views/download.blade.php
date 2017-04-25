@@ -34,6 +34,10 @@
 						@endif
 					</div>
 					<div class="form-group {{ ( $errors->has('email') ? 'has-error' : '' ) }} text-center">
+						<div class="checkbox">
+						  <label>
+						    <input type="checkbox" name="subscribe" id="subscribe" value="1" checked>Saya bersedia menerima informasi promo lainnya melalui email ini.</label>
+						</div>
 						<button type="submit" class="button-kirim-download">
 							<img src="{{ asset('img/download-button.png') }}" class="img-responsive" style="margin: auto">
 						</button>

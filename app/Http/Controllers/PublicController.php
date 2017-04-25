@@ -219,6 +219,7 @@ class PublicController extends Controller
     		$download = new Download;
     		$download->name = $request->input('name');
     		$download->email = $request->input('email');
+            $download->subscribe = ( $request->input('subscribe') == 0 ? false : true );
 
     		if ($download->save()) {
 
