@@ -123,7 +123,7 @@
 				</div>
 
 				<div class="form-group {{ ( $errors->has('nominal') ? 'has-error' : '' ) }}">
-					<input type="text" name="nominal" class="form-control" value="{{ old('nominal') }}" placeholder="Nilai pembelian Dulux dan Dulux Catylac *">
+					<input type="number" name="nominal" class="form-control" value="{{ old('nominal') }}" placeholder="Nilai pembelian Dulux dan Dulux Catylac *">
 					@if($errors->has('nominal'))
 					<label class="help-block">
 						<strong>{{ $errors->first('nominal') }}</strong>
