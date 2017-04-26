@@ -34,7 +34,7 @@ class FormSubmited extends Mailable
     public function build()
     {
         $coupons = Coupon::where('receipt_id', $this->receipt->id)->get();
-        $subject = ( $coupons->isEmpty() ? 'Warna Warni Kemenanganmu' : 'Nomor Undian Warna Warni Kemenanganmu' );
+        $subject = ( $coupons->isEmpty() ? 'Email notification Warna Warni Kemenangan' : 'Nomor Undian Warna Warni Kemenanganmu' );
         return $this->from('no-reply@letscolourindonesia.com')
             ->from('noreply.dulux@gmail.com', 'Lets Colour Indonesia')
             ->subject($subject)
