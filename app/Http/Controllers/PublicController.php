@@ -145,6 +145,7 @@ class PublicController extends Controller
 	        if ($receipt->save()) {
 
                 $coupon_num = floor($receipt->nominal / 750000);
+                    
                 for ($i=1; $i <= $coupon_num; $i++) { 
                     $coupon = new Coupon;
                     $coupon->receipt_id = $receipt->id;
@@ -172,8 +173,13 @@ class PublicController extends Controller
 
                 }
 
-	        	$user = Receipt::findOrFail($receipt->id);
-    			Mail::to($receipt->email)->queue(new FormSubmited($user));
+                if ($coupon_num >= 1) {
+                    $user = Receipt::findOrFail($receipt->id);
+                    Mail::to($receipt->email)->queue(new FormSubmited($user));
+                } else {
+                    $user = Receipt::findOrFail($receipt->id);
+                    Mail::to($receipt->email)->queue(new NoCoupon($user));   
+                }
 
 	        	return redirect()->back()
     				->with('message', 'Successfully submited');
