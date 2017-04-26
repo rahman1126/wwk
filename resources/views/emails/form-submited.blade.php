@@ -247,6 +247,12 @@
 															<table border="0" cellpadding="30" cellspacing="0" width="100%">
 																<tr>
 																	<td align="center" valign="top" class="textContent">
+																		@if($coupons->isEmpty())
+
+																		<p style="color:#FFFFFF;line-height:100%;font-family:Helvetica,Arial,sans-serif;font-size:16px;font-weight:normal;margin-bottom:40px;text-align:center;">Terima kasih! Anda telah berpartisipasi di program Dulux #WarnaKemenangan. Kumpulkan struk pembelian Anda hingga mencapai minimal Rp. 750.000,- untuk mendapatkan 1 nomor undian berlaku kelipatan, yang akan diundi untuk memenangkan hadiah utama paket wisata ke Dubai bersama Dulux.</p>
+
+																		@else
+
 																		<p style="color:#FFFFFF;line-height:100%;font-family:Helvetica,Arial,sans-serif;font-size:16px;font-weight:normal;margin-bottom:40px;text-align:center;">Selamat Anda mendapat satu nomor undian Dulux #WarnaKemenangan dan berkesempatan memenangkan hadiah utama paket wisata ke Dubai dari Dulux.</p>
 																		@foreach($coupons as $item)
 																		<h2 style="text-align: center;
@@ -257,6 +263,8 @@ background: -o-linear-gradient(top, #fffaaf 0%, #e0ba18 96%, #eddb13 100%);
 background: -ms-linear-gradient(top, #fffaaf 0%, #e0ba18 96%, #eddb13 100%);
 background: linear-gradient(to bottom, #fffaaf 0%, #e0ba18 96%, #eddb13 100%);">{{ $item->coupon_code }}</h2>
 																		@endforeach
+
+																		@endif
 																	</td>
 																</tr>
 															</table>

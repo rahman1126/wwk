@@ -10,7 +10,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use App\Receipt;
 use App\Coupon;
 
-class FormSubmited extends Mailable
+class NoCoupon extends Mailable
 {
     use Queueable, SerializesModels;
 
