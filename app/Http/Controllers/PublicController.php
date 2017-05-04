@@ -31,6 +31,11 @@ class PublicController extends Controller
     		->with('provinsi', $provinsi);
     }
 
+    public function terms()
+    {
+        return view('terms');
+    }
+
     // for ajax
     public function getCity(Request $request)
     {

@@ -52,7 +52,7 @@
         <div id="mySidenav" class="sidenav">
           <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
           <a href="{{ url('/') }}">Home</a>
-          <a href="#">Syarat &amp; Ketentuan</a>
+          <a href="{{ url('/term-and-conditions') }}">Syarat &amp; Ketentuan</a>
           <a href="{{ url('/download') }}">Download</a>
         </div>
 
@@ -74,7 +74,7 @@
                             <!-- Left Side Of Navbar -->
                             <ul class="nav navbar-nav">
                                 <li><a href="{{ url('/') }}">Home</a></li>
-                                <li><a href="#">Syarat &amp; Ketentuan</a></li>
+                                <li><a href="{{ url('/term-and-conditions') }}">Syarat &amp; Ketentuan</a></li>
                                 <li><a href="{{ url('/download') }}">Download</a></li>
                             </ul>
                         </div>

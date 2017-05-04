@@ -20,6 +20,8 @@ Route::get('/download-success', 'PublicController@downloadSuccess');
 Route::post('/download', 'PublicController@startDownload');
 Route::post('/fire-download', 'PublicController@startDownloadNow');
 
+Route::get('/term-and-conditions', 'PublicController@terms');
+
 Route::get('download/facebook', 'PublicController@redirectToProvider');
 Route::get('download/facebook/callback', 'PublicController@handleProviderCallback');
 
