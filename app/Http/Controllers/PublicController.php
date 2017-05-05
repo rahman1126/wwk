@@ -23,7 +23,7 @@ class PublicController extends Controller
 {
     public function index(){
 
-        return redirect('download');
+        // return redirect('download');
 
     	$provinsi = City::groupBy('provinsi')->get();
 
