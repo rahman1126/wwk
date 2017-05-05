@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Download;
 use App\Receipt;
+use App\Photo;
 
 class HomeController extends Controller
 {
@@ -36,5 +37,25 @@ class HomeController extends Controller
             ->with('unique_submission', $unique_submission)
             ->with('total_download', $total_download)
             ->with('unique_download', $unique_download);
+    }
+
+    /*
+    * Submissions List
+    */
+    public function submissions()
+    {
+        $submissions = Receipt::paginate(50);
+        return view('admin.submission.view')
+            ->with('submissions', $submissions);
+    }
+
+    /*
+    * Images View
+    */
+    public function submissionImages($id)
+    {
+        $images = Photo::where('receipt_id', $id)->get();
+        return view('admin.submission.images')
+            ->with('images', $images);
     }
 }

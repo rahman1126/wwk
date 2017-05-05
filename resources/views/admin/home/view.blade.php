@@ -10,7 +10,7 @@
 		            		Total Submission
 		            	</div>
 		            	<div class="panel-body">
-		            		{{ $total_submission }}
+		            		<a href="{{ url('admin/panel/home/submissions') }}">{{ $total_submission }}</a>
 		            	</div>
 		            </div>
             	</div>

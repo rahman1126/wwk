@@ -41,7 +41,7 @@ class RegisterController extends Controller
 
     public function showRegistrationForm()
     {
-        return redirect('/admin/panel/home');
+        return redirect('/admin/panel/login');
     }
 
     /**

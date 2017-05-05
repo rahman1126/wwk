@@ -32,4 +32,6 @@ Route::group(['prefix' => 'admin/panel'], function() {
 
 Route::group(['prefix' => 'admin/panel/'], function() {
     Route::get('/home', 'HomeController@index');
+    Route::get('/home/submissions', 'HomeController@submissions');
+    Route::get('/home/submission/{id}', 'HomeController@submissionImages');
 });
