@@ -14,7 +14,7 @@
 		            	</div>
 		            </div>
             	</div>
-            	<div class="col-md-6">
+            	<!-- <div class="col-md-6">
             		<div class="panel panel-default">
 		            	<div class="panel-heading">
 		            		Unique Submission
@@ -23,7 +23,7 @@
 		            		{{ $unique_submission }}
 		            	</div>
 		            </div>
-            	</div>
+            	</div> -->
             	<div class="col-md-6">
             		<div class="panel panel-default">
 		            	<div class="panel-heading">
