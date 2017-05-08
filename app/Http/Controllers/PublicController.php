@@ -63,6 +63,7 @@ class PublicController extends Controller
             'location'          => 'max:100',
             // 'images'             => 'required|mimes:jpg,jpeg,gif,png|image|max:5000',
             'term'              => 'required',
+            'mendaftar'         => 'required',
         ];
 
         $message = [
@@ -93,6 +94,7 @@ class PublicController extends Controller
           'image.mimes'             => 'Format foto harus jpg,jpeg,gif atau png',
           'image.max'               => 'Foto maksimal berukuran 5 mb',
           'term.required'           => 'Centang untuk menyetujui syarat dan ketentuan kami',
+          'mendaftar.required'      => 'Centang untuk menyetujui syarat dan ketentuan kami',
         ];
 
         $valid = Validator::make($request->all(), $rule, $message);
