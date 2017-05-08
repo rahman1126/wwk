@@ -209,7 +209,7 @@
 					</div>
 					<div class="checkbox">
 						<label>
-							<input type="checkbox" name="mendaftar" required="required"> *Dengan mendaftar dan ikut serta dalam program undian ini, Anda setuju untuk memperbolehkan PT ICI Paints Indonesia untuk mengumpulkan, menggunakan dan mengungkapkan data pribadi Anda untuk pelaksanaan program undian ini dan komunikasi marketing di masa yang akan datang. Untuk informasi lebih lanjut, silakan lihat syarat dan ketentuan.
+							<input type="checkbox" name="mendaftar" required="required"> Dengan mendaftar dan ikut serta dalam program undian ini, Anda setuju untuk memperbolehkan PT ICI Paints Indonesia untuk mengumpulkan, menggunakan dan mengungkapkan data pribadi Anda untuk pelaksanaan program undian ini dan komunikasi marketing di masa yang akan datang. Untuk informasi lebih lanjut, silakan lihat syarat dan ketentuan.
 						</label>
 					</div>
 					<button type="submit" class="button-kirim">
