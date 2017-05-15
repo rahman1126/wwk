@@ -34,4 +34,11 @@ Route::group(['prefix' => 'admin/panel/'], function() {
     Route::get('/home', 'HomeController@index');
     Route::get('/home/submissions', 'HomeController@submissions');
     Route::get('/home/submission/{id}', 'HomeController@submissionImages');
+    Route::get('/home/submission/edit/{id}', 'HomeController@submissionEdit');
+    Route::post('/home/submission/update', 'HomeController@submissionUpdate');
+    Route::post('/home/submission/export', 'HomeController@submissionExport');
+    Route::post('/home/submission/export/code', 'HomeController@submissionExportCode');
+
+    Route::get('/home/downloads', 'HomeController@downloads');
+    Route::post('/home/downloads/export', 'HomeController@downloadExport');
 });

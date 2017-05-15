@@ -31,6 +31,13 @@
             margin: -32px 0 0 -32px;
             padding: 0;
         }
+
+        .table > thead > tr > th{
+            font-size: 12px;
+        }
+        .table > tbody > tr > td{
+            font-size: 12px;
+        }
     </style>
     <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/font-awesome.min.css') }}">
@@ -51,7 +58,9 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="{{ url('admin/panel/home') }}">Home</a></li>
+            <li><a href="{{ url('admin/panel/home') }}">Home</a></li>
+            <li><a href="{{ url('admin/panel/home/submissions') }}">Submission</a></li>
+            <li><a href="{{ url('admin/panel/home/downloads') }}">Download Booklet</a></li>
             @if(Auth::check())
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ Auth::user()->name }} <span class="caret"></span></a>
