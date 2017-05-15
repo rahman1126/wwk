@@ -34,7 +34,7 @@ class HomeController extends Controller
         $unique_download = Download::distinct('email')->count('email');
 
         $total_submission = Receipt::count();
-        $unique_submission = Receipt::where('nominal', '>=', 750000)->groupBy('email')->count();
+        $unique_submission = Receipt::where('nominal', '>=', 750000)->count();
         return view('admin.home.view')
             ->with('total_submission', $total_submission)
             ->with('unique_submission', $unique_submission)
