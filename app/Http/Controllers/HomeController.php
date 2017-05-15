@@ -197,7 +197,7 @@ class HomeController extends Controller
                 $sheet->fromArray($dataArray, null, 'A1', false, false);
             });
 
-        })->download('csv');
+        })->download('xls');
     }
 
     /*
@@ -234,6 +234,6 @@ class HomeController extends Controller
                 $sheet->fromArray($dataArray, null, 'A1', false, false);
             });
 
-        })->download('csv');
+        })->download('xls');
     }
 }
