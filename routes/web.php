@@ -36,6 +36,8 @@ Route::group(['prefix' => 'admin/panel/'], function() {
     Route::get('/home/submission/{id}', 'HomeController@submissionImages');
     Route::get('/home/submission/edit/{id}', 'HomeController@submissionEdit');
     Route::post('/home/submission/update', 'HomeController@submissionUpdate');
+    Route::post('/home/submission/edit/add/code', 'HomeController@addCode');
+    Route::post('/home/submission/send/code', 'HomeController@sendCode');
     Route::post('/home/submission/export', 'HomeController@submissionExport');
     Route::post('/home/submission/export/code', 'HomeController@submissionExportCode');
 

@@ -4,6 +4,29 @@
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
         <h3>Edit Receipt</h3>
+
+        @if(Session::has('error'))
+            <p class="alert alert-danger">{{ Session::get('error') }}</p>
+        @elseif(Session::has('success'))
+            <p class="alert alert-success">{{ Session::get('success') }}</p>
+        @endif
+
+        <div class="row">
+            @foreach($images as $item)
+            <div class="col-md-3">
+                <img src="{{ $item->image_url }}" class="thumbnail img-responsive" alt="Responsive image" data-toggle="modal" data-target="#myModal-{{ $item->id }}" style="cursor: zoom-in;">
+            </div>
+            <!-- Modal -->
+            <div class="modal fade" id="myModal-{{ $item->id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <img src="{{ $item->image_url }}" class="img-responsivex">
+                </div>
+              </div>
+            </div>
+            @endforeach
+        </div>
+
         <div class="panel panel-default">
             <div class="panel-body">
                 @if(Session::has('error'))
@@ -93,6 +116,55 @@
                         </div>
                     </div>
                 </form>
+            </div>
+        </div>
+
+
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Unique Code</th>
+                            <th>Date Created</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php $i = 1; ?>
+                        @foreach($data->coupon as $undian)                            
+                        <tr>
+                            <td>{{ $i }}</td>
+                            <td>{{ $undian->coupon_code }}</td>
+                            <td>{{ $undian->created_at->format('d/m/y h:i:s') }}</td>
+                            <td>
+                                <form style="display: inline;" method="post" action="{{ url('admin/panel/home/submission/send/code') }}">
+                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                    <input type="hidden" name="code" value="{{ $undian->coupon_code }}">
+                                    <input type="hidden" name="id" value="{{ $data->id }}">
+                                    <button class="btn btn-sm btn-info">Send Code</button>
+                                </form>
+                            </td>
+                        </tr>
+                        <?php $i++ ?>
+                        @endforeach
+                        <tr>
+                            <td>
+                                <form style="display: inline;" method="post" action="{{ url('admin/panel/home/submission/edit/add/code') }}">
+                                    <input type="hidden" name="id" value="{{ $data->id }}">
+                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                    <button class="btn btn-sm btn-warning">Add new code</button><br>
+                                </form>
+                            </td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <p><i>Press <b>Add new code</b> button to add more coupon code to this user. There is no alert when you press this button. So make sure you know what you doing.</i></p>
+                        <p><i>Press <b>Send code</b> button to send code to this user. Make sure you only send the new code you just created. (see the date created)</i></p>
+                    </tbody>
+                </table>
             </div>
         </div>
 

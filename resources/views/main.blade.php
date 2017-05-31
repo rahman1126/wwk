@@ -137,19 +137,19 @@
 					<h4 style="margin-bottom: 25px; font-size: 16px;">Bersedia menerima informasi program lainnya melalui:</h4>
 					<div class="checkbox">
 					  <label>
-					    <input type="checkbox" name="contact_accept[]" id="optionsRadios1" value="sms" {{ ( old('contact_accept') == 'sms' ? 'checked' : '' ) }}>
+					    <input type="checkbox" name="contact_accept[]" id="optionsRadios1" value="sms" {{ ( old('contact_accept.0') == 'sms' ? 'checked' : '' ) }}>
 					    SMS
 					  </label>
 					</div>
 					<div class="checkbox">
 					  <label>
-					    <input type="checkbox" name="contact_accept[]" id="optionsRadios2" value="telepon" {{ ( old('contact_accept') == 'telepon' ? 'checked' : '' ) }}>
+					    <input type="checkbox" name="contact_accept[]" id="optionsRadios2" value="telepon" {{ ( old('contact_accept.1') == 'telepon' ? 'checked' : '' ) }}>
 					    Telepon
 					  </label>
 					</div>
 					<div class="checkbox">
 					  <label>
-					    <input type="checkbox" name="contact_accept[]" id="optionsRadios3" value="email" {{ ( old('contact_accept') == 'email' ? 'checked' : '' ) }}>
+					    <input type="checkbox" name="contact_accept[]" id="optionsRadios3" value="email" {{ ( old('contact_accept.2') == 'email' ? 'checked' : '' ) }}>
 					    Email
 					  </label>
 					</div>
@@ -161,7 +161,7 @@
 						@endif
 					</div>
 				</div>
-				<div class="form-group">
+				<div class="form-group {{ ( $errors->has('images.*') ? 'has-error' : '' ) }}">
 					<div class="row">
 						<div class="col-xs-6 col-sm-6">
 							<div id="uploading">
@@ -196,6 +196,11 @@
 							</div>
 						</div>
 					</div>
+					@if($errors->has('images.*'))
+						<label class="help-block">
+							<strong>{{ $errors->first('images.*') }}</strong>
+						</label>
+					@endif
 				</div>
 			</div>
 

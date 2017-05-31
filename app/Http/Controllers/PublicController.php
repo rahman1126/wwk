@@ -61,7 +61,7 @@ class PublicController extends Controller
             'region'            => 'required',
             'city'              => 'required_with:region',
             'location'          => 'max:100',
-            // 'images'             => 'required|mimes:jpg,jpeg,gif,png|image|max:5000',
+            'images.*'          => 'required|mimes:jpg,jpeg,gif,png|max:5000',
             'term'              => 'required',
             'mendaftar'         => 'required',
         ];
@@ -90,9 +90,9 @@ class PublicController extends Controller
           'region.required'         => 'Pilih provinsi',
           'city.required'           => 'Pilih kota',
           'location.max'            => 'Lokasi maksimal 100 karakter',
-          'image.required'          => 'Pilih foto',
-          'image.mimes'             => 'Format foto harus jpg,jpeg,gif atau png',
-          'image.max'               => 'Foto maksimal berukuran 5 mb',
+          'images.*.required'          => 'Pilih foto',
+          'images.*.mimes'             => 'Format foto harus jpg,jpeg,gif atau png',
+          'images.*.max'               => 'Mohon maaf file anda tidak dapat di unggah karena maksimum file yang dapat di unggah sebesar 5 MB.',
           'term.required'           => 'Centang untuk menyetujui syarat dan ketentuan kami',
           'mendaftar.required'      => 'Centang untuk menyetujui syarat dan ketentuan kami',
         ];

@@ -12,6 +12,9 @@ use App\Coupon;
 use DB;
 use Excel;
 use Validator;
+use Mail;
+
+use App\Mail\SendCode;
 
 class HomeController extends Controller
 {
@@ -60,8 +63,39 @@ class HomeController extends Controller
     public function submissionEdit($id)
     {
         $data = Receipt::find($id);
+        $images = Photo::where('receipt_id', $id)->get();
         return view('admin.submission.edit')
+            ->with('images', $images)
             ->with('data', $data);
+    }
+
+    /*
+    * Add new unique code
+    */
+    public function addCode(Request $request)
+    {
+        $id = $request->input('id');
+        $receipt = Receipt::find($id);
+        $coupon = new Coupon;
+        $coupon->receipt_id = $id;
+        $coupon->coupon_code = $receipt->city_id . substr(str_shuffle("ABCDEFGHIJKLMNOPQRSTUVWXYZ"), -7);
+        $coupon->save();
+
+        return redirect()->back()
+            ->with('success', 'Code has been added');
+    }
+
+    /*
+    * Send code by email
+    */
+    public function sendCode(Request $request)
+    {
+        $user = Receipt::findOrFail($request->input('id'));
+        $coupon = $request->input('code');
+        Mail::to($user->email)->queue(new SendCode($coupon));
+
+        return redirect()->back()
+            ->with('success', 'Email with code has been sent');
     }
 
     /*
@@ -93,7 +127,7 @@ class HomeController extends Controller
             $receipt->nominal = $request->input('nominal');
 
             if ($receipt->save()) {
-                return redirect('admin/panel/home/submissions')
+                return redirect()->back()
                     ->with('success', 'Receipt has been updated');
             } else {
                 return redirect()->back()
