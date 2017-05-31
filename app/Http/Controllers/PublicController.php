@@ -61,7 +61,7 @@ class PublicController extends Controller
             'region'            => 'required',
             'city'              => 'required_with:region',
             'location'          => 'max:100',
-            'images.*'          => 'required|mimes:jpg,jpeg,gif,png|max:5000',
+            'images.*'          => 'required|image|mimes:jpg,jpeg,gif,png|max:5000',
             'term'              => 'required',
             'mendaftar'         => 'required',
         ];
