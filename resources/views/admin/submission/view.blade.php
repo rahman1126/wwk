@@ -22,7 +22,7 @@
         </p>
         @endif
 
-        <div class="table-responsive">
+        <div class="table-responsives">
         	<table class="table table-bordered">
         		<thead>
         			<tr>
@@ -69,7 +69,7 @@
                             <span class="text-danger">{{ $undian->coupon_code }}</span>
                             @endforeach
                         </td>
-        				<td>{{ $item->created_at->format('d/m/y') }}</td>
+        				<td>{{ $item->created_at->format('d/m/y H:i:s') }}</td>
         			</tr>
         			@endforeach
         		</tbody>
