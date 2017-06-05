@@ -154,9 +154,9 @@
 					  </label>
 					</div>
 					<div class="form-group {{ ( $errors->has('contact_accept') ? 'has-error' : '' ) }}">
-						@if($errors->has('contact_accept'))
+						@if($errors->has('contact_accept.*'))
 						<label class="help-block">
-							<strong>{{ $errors->first('contact_accept') }}</strong>
+							<strong>{{ $errors->first('contact_accept.*') }}</strong>
 						</label>
 						@endif
 					</div>
@@ -168,7 +168,7 @@
 								<div class="upload-box" id="uploadBtn1">
 									<img src="{{ asset('img/upload.png') }}" class="img-responsive upload-placeholder" id="imgPlaceholder1">
 								</div>
-								<input type="file" name="images[]" id="file1" accept="image/*" style="display: none">
+								<input type="file" name="images[]" id="file1" accept="image/*" style="display: none" required>
 							</div>
 						</div>
 						<div class="col-xs-6 col-sm-6">

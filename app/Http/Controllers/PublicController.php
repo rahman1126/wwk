@@ -56,7 +56,7 @@ class PublicController extends Controller
             'id_card'           => 'required|numeric',
             'address'           => 'required|max:255',
             'store_name'        => 'required|max:100',
-            'contact_accept'    => 'required',
+            'contact_accept.*'  => 'required',
             'nominal'           => 'required|numeric|regex:/^[0-9]+$/',
             'region'            => 'required',
             'city'              => 'required_with:region',
@@ -83,7 +83,7 @@ class PublicController extends Controller
           'address.max'             => 'Alamat maksimal 200 karakter',
           'store_name.required'     => 'Nama toko wajib di isi',
           'store_name.max'          => 'Nama toko maksimal 100 karakter',
-          'contact_accept.required' => 'Pilih salah satu media diatas',
+          'contact_accept.*.required' => 'Pilih salah satu media diatas',
           'nominal.required'        => 'Nominal wajib di isi',
           'nominal.numeric'         => 'Nominal harus berupa angka',
           'nominal.regex'           => 'Nominal tanpa menggunakan titik',
@@ -162,24 +162,26 @@ class PublicController extends Controller
                     $coupon->save();
                 }
 
-                foreach ($request->images as $photo) {
+                if ($request->has('images')) {
+                	foreach ($request->images as $photo) {
 
-                    $file = $photo;
-                    $filename = snake_case($request->input('name')) . '_' . time();
+	                    $file = $photo;
+	                    $filename = snake_case($request->input('name')) . '_' . time();
 
-                    $destinationPath = public_path('uploads/' . $filename . '.' . $file->getClientOriginalExtension());
-                    $img = Image::make($photo);
-                    $img->resize(800, null, function ($constraint) {
-                        $constraint->aspectRatio();
-                    });
-                    $img->save($destinationPath);
-                    $img_url = url('/uploads'. '/'. $filename . '.' . $file->getClientOriginalExtension());
+	                    $destinationPath = public_path('uploads/' . $filename . '.' . $file->getClientOriginalExtension());
+	                    $img = Image::make($photo);
+	                    $img->resize(800, null, function ($constraint) {
+	                        $constraint->aspectRatio();
+	                    });
+	                    $img->save($destinationPath);
+	                    $img_url = url('/uploads'. '/'. $filename . '.' . $file->getClientOriginalExtension());
 
-                    $photo = new Photo;
-                    $photo->receipt_id = $receipt->id;
-                    $photo->image_url = $img_url;
-                    $photo->save();
+	                    $photo = new Photo;
+	                    $photo->receipt_id = $receipt->id;
+	                    $photo->image_url = $img_url;
+	                    $photo->save();
 
+	                }
                 }
 
                 $user = Receipt::findOrFail($receipt->id);

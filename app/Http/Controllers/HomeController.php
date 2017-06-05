@@ -166,8 +166,7 @@ class HomeController extends Controller
     */
     public function downloadExport(Request $request)
     {
-        $users = Download::select(DB::raw('id, name, email, created_at'))
-          ->get();
+        $users = Download::select(DB::raw('id, name, email, created_at'))->get();
 
        // Initialize the array which will be passed into the Excel
         // generator.
