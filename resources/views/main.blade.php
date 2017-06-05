@@ -161,11 +161,16 @@
 						@endif
 					</div>
 				</div>
+				<style type="text/css">
+					.upload-box.error{
+					    background-color: #ff7979 !important;
+					}
+				</style>
 				<div class="form-group {{ ( $errors->has('images.*') ? 'has-error' : '' ) }}">
 					<div class="row">
 						<div class="col-xs-6 col-sm-6">
 							<div id="uploading">
-								<div class="upload-box {{ ( $errors->has('images.*') ? 'error-image' : '' ) }}" id="uploadBtn1">
+								<div class="upload-box {{ ( $errors->has('images.*') ? 'error' : '' ) }}" id="uploadBtn1">
 									<img src="{{ asset('img/upload.png') }}" class="img-responsive upload-placeholder" id="imgPlaceholder1">
 								</div>
 								<input type="file" name="images[]" id="file1" accept="image/*" style="display: none">
