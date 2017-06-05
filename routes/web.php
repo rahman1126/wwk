@@ -15,10 +15,12 @@ Route::get('/', 'PublicController@index');
 Route::post('/get-city', 'PublicController@getCity');
 Route::get('/get-city', 'PublicController@index');
 Route::post('/submit', 'PublicController@submit');
+Route::get('/submit', 'PublicController@index');
 Route::get('/download', 'PublicController@download');
 Route::get('/download-success', 'PublicController@downloadSuccess');
 Route::post('/download', 'PublicController@startDownload');
 Route::post('/fire-download', 'PublicController@startDownloadNow');
+Route::get('/fire-download', 'PublicController@download');
 
 Route::get('/term-and-conditions', 'PublicController@terms');
 
