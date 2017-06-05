@@ -165,7 +165,7 @@ class PublicController extends Controller
                     $coupon->save();
                 }
 
-                if ($request->has('images')) {
+                if ($request->hasFile('images')) {
                 	foreach ($request->images as $photo) {
 
 	                    $file = $photo;
