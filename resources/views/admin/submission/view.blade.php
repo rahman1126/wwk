@@ -2,7 +2,7 @@
 @section('content')
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-10 col-md-offset-1">
+        <div class="col-md-12">
 
         <form style="display: inline;" method="post" action="{{ url('admin/panel/home/submission/export') }}">
             {{ csrf_field() }}
