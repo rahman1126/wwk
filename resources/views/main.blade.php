@@ -165,10 +165,10 @@
 					<div class="row">
 						<div class="col-xs-6 col-sm-6">
 							<div id="uploading">
-								<div class="upload-box" id="uploadBtn1">
+								<div class="upload-box {{ ( $errors->has('images.*') ? 'error-image' : '' ) }}" id="uploadBtn1">
 									<img src="{{ asset('img/upload.png') }}" class="img-responsive upload-placeholder" id="imgPlaceholder1">
 								</div>
-								<input type="file" name="images[]" id="file1" accept="image/*" style="display: none" required>
+								<input type="file" name="images[]" id="file1" accept="image/*" style="display: none">
 							</div>
 						</div>
 						<div class="col-xs-6 col-sm-6">
