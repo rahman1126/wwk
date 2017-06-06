@@ -27,6 +27,19 @@
             @endforeach
         </div>
 
+        <div class="row">
+            <div class="col-md-12">
+                <form action="{{ url('admin/panel/home/submission/edit/add-image') }}" method="post" enctype="multipart/form-data">
+                    {{ csrf_field() }}
+                    <input type="hidden" name="id" value="{{ $data->id }}">
+                    <input type="file" name="images">
+                    <br>
+                    <button class="btn btn-success">Upload</button>
+                </form>
+                <br>
+            </div>
+        </div>
+
         <div class="panel panel-default">
             <div class="panel-body">
                 @if(Session::has('error'))

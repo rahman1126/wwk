@@ -13,6 +13,7 @@ use DB;
 use Excel;
 use Validator;
 use Mail;
+use Image;
 
 use App\Mail\SendCode;
 
@@ -67,6 +68,47 @@ class HomeController extends Controller
         return view('admin.submission.edit')
             ->with('images', $images)
             ->with('data', $data);
+    }
+
+    public function addImage(Request $request)
+    {
+
+        $valid = Validator::make($request->all(), [
+            'images'    => 'required|image|mimes:jpg,jpeg,gif,png|max:5000'
+        ]);
+
+        if ($valid->fails()) {
+            
+            return redirect()->back()
+                ->withErrors($valid)
+                ->withInput();
+
+        } else {
+
+            $receipt = Receipt::find($request->input('id'));
+
+            if ($request->hasFile('images')) {
+                $file = $request->file('images');
+                $filename = snake_case($request->input('name')) . '_' . time();
+
+                $destinationPath = public_path('uploads/' . $filename . '.' . $file->getClientOriginalExtension());
+                $img = Image::make($file);
+                $img->resize(800, null, function ($constraint) {
+                    $constraint->aspectRatio();
+                });
+                $img->save($destinationPath);
+                $img_url = url('/uploads'. '/'. $filename . '.' . $file->getClientOriginalExtension());
+
+                $photo = new Photo;
+                $photo->receipt_id = $receipt->id;
+                $photo->image_url = $img_url;
+                
+                if ($photo->save()) {
+                    return redirect()->back()
+                        ->with('success', 'Image has been added');
+                }
+            }
+        }
     }
 
     /*
