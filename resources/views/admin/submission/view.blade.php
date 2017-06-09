@@ -14,6 +14,13 @@
             <button type="submit" class="btn btn-success">Export Unique Codes</button>
         </form>
 
+        <form style="display: inline">
+            <div class="form-group col-md-4">
+                <input type="text" name="key" class="form-control" placeholder="Type name or email here and hit enter...">
+            </div>
+            {{ csrf_field() }}
+        </form>
+
         <br><br>
 
         @if(Session::has('success'))

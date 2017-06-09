@@ -10,7 +10,7 @@
 				</div>	
 			</div>
 			<div class="col-sm-6">
-				<img src="{{ url('img/png-09.png') }}" class="img-responsive download-banner">
+				<img src="{{ url('img/download-img.jpg') }}" class="img-responsive download-banner">
 			</div>
 			<div class="col-sm-6">		
 				<p class="download-info">Lengkapi data diri Anda dan temukan<br><b>Inspirasi Warna Dulux 2017</b><br>untuk mempercantik ruangan Anda.</p>

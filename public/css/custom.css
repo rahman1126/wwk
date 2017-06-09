@@ -25,6 +25,10 @@ body{
     margin-bottom: 15px;
 }
 
+.upload-box.error{
+    background-color: red!important;
+}
+
 .upload-placeholder{
 	transition: 0.3s all;
 	-webkit-transition: 0.3s all;

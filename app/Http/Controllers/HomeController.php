@@ -49,11 +49,20 @@ class HomeController extends Controller
     /*
     * Submissions List
     */
-    public function submissions()
+    public function submissions(Request $request)
     {
-        $submissions = Receipt::join('city', 'city.id', '=', 'receipt.city_id')
-            ->select('receipt.*', 'city.kota')
-            ->paginate(50);
+        if ($request->has('key')) {
+            $submissions = Receipt::join('city', 'city.id', '=', 'receipt.city_id')
+                ->select('receipt.*', 'city.kota')
+                ->where('receipt.name', 'LIKE', '%' . $request->input('key') . '%')
+                ->orWhere('receipt.email', 'LIKE', '%' . $request->input('key') . '%')
+                ->paginate(50);
+        } else {
+            $submissions = Receipt::join('city', 'city.id', '=', 'receipt.city_id')
+                ->select('receipt.*', 'city.kota')
+                ->paginate(50);
+        }
+        
         return view('admin.submission.view')
             ->with('submissions', $submissions);
     }
