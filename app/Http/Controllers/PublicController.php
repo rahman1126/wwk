@@ -150,7 +150,7 @@ class PublicController extends Controller
     		$receipt->id_card = $request->input('id_card');
     		$receipt->address = $request->input('address');
     		$receipt->store_name = $request->input('store_name');
-    		$receipt->contact_accept = implode(',', $contact_accept);
+    		( $receipt->contact_accept != '' ? $receipt->contact_accept = implode(',', $contact_accept) : $receipt->contact_accept = 'email' );
     		$receipt->nominal = $request->input('nominal');
 	        // $receipt->unique_code = $city_id . substr(str_shuffle("ABCDEFGHIJKLMNOPQRSTUVWXYZ"), -7);
 

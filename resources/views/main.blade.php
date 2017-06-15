@@ -149,7 +149,7 @@
 					</div>
 					<div class="checkbox">
 					  <label>
-					    <input type="checkbox" name="contact_accept[]" id="optionsRadios3" value="email" {{ ( old('contact_accept.2') == 'email' ? 'checked' : '' ) }}>
+					    <input type="checkbox" name="contact_accept[]" id="optionsRadios3" value="email" {{ ( old('contact_accept.2') == 'email' ? 'checked' : '' ) }} required>
 					    Email
 					  </label>
 					</div>
