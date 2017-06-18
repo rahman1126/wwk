@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-
+<div class="modal-backdrop fade in" style="display: none"></div>
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -149,11 +149,11 @@
 					</div>
 					<div class="checkbox">
 					  <label>
-					    <input type="checkbox" name="contact_accept[]" id="optionsRadios3" value="email" {{ ( old('contact_accept.2') == 'email' ? 'checked' : '' ) }} required>
+					    <input type="checkbox" name="contact_accept[]" id="optionsRadios3" value="email" {{ ( old('contact_accept.2') == 'email' ? 'checked' : '' ) }}>
 					    Email
 					  </label>
 					</div>
-					<div class="form-group {{ ( $errors->has('contact_accept') ? 'has-error' : '' ) }}">
+					<div class="form-group {{ ( $errors->has('contact_accept.*') ? 'has-error' : '' ) }}">
 						@if($errors->has('contact_accept.*'))
 						<label class="help-block">
 							<strong>{{ $errors->first('contact_accept.*') }}</strong>
@@ -166,67 +166,93 @@
 					    background-color: #ff7979 !important;
 					}
 				</style>
-				<div class="form-group {{ ( $errors->has('images.*') ? 'has-error' : '' ) }}">
+				<div class="form-group {{ ( Session::has('error') ? 'has-error' : '' ) }}">
 					<div class="row">
 						<div class="col-xs-6 col-sm-6">
 							<div id="uploading">
-								<div class="upload-box {{ ( $errors->has('images.*') ? 'error' : '' ) }}" id="uploadBtn1">
-									<img src="{{ asset('img/upload.png') }}" class="img-responsive upload-placeholder" id="imgPlaceholder1">
+								<div id="loader1" style="display: none"></div>
+								<div class="upload-box {{ ( $errors->has('images.*') ? 'error' : '' ) }}" id="btnUpload">
+									<img src="{{ ( Session::has('image1') ? Session::get('image1') : asset('img/upload.png') ) }}" class="img-responsive upload-placeholder" id="imgPlaceholder1">
 								</div>
-								<input type="file" name="images[]" id="file1" accept="image/*" style="display: none">
+								{{-- <input type="file" name="images[]" id="file1" accept="image/*" style="display: none"> --}}
 							</div>
 						</div>
 						<div class="col-xs-6 col-sm-6">
 							<div id="uploading">
-								<div class="upload-box" id="uploadBtn2">
-									<img src="{{ asset('img/upload.png') }}" class="img-responsive upload-placeholder" id="imgPlaceholder2">
+								<div id="loader2" style="display: none"></div>
+								<div class="upload-box" id="btnUpload2">
+									<img src="{{ ( Session::has('image2') ? Session::get('image2') : asset('img/upload.png') ) }}" class="img-responsive upload-placeholder" id="imgPlaceholder2">
 								</div>
-								<input type="file" name="images[]" id="file2" accept="image/*" style="display: none">
 							</div>
 						</div>
 						<div class="col-xs-6 col-sm-6">
 							<div id="uploading">
-								<div class="upload-box" id="uploadBtn3">
-									<img src="{{ asset('img/upload.png') }}" class="img-responsive upload-placeholder" id="imgPlaceholder3">
+								<div id="loader3" style="display: none"></div>
+								<div class="upload-box" id="btnUpload3">
+									<img src="{{ ( Session::has('image3') ? Session::get('image3') : asset('img/upload.png') ) }}" class="img-responsive upload-placeholder" id="imgPlaceholder3">
 								</div>
-								<input type="file" name="images[]" id="file3" accept="image/*" style="display: none">
 							</div>
 						</div>
 						<div class="col-xs-6 col-sm-6">
 							<div id="uploading">
-								<div class="upload-box" id="uploadBtn4">
-									<img src="{{ asset('img/upload.png') }}" class="img-responsive upload-placeholder" id="imgPlaceholder4">
+								<div id="loader4" style="display: none"></div>
+								<div class="upload-box" id="btnUpload4">
+									<img src="{{ ( Session::has('image4') ? Session::get('image4') : asset('img/upload.png') ) }}" class="img-responsive upload-placeholder" id="imgPlaceholder4">
 								</div>
-								<input type="file" name="images[]" id="file4" accept="image/*" style="display: none">
 							</div>
 						</div>
 					</div>
-					@if($errors->has('images.*'))
+					@if(Session::has('error'))
 						<label class="help-block">
-							<strong>{{ $errors->first('images.*') }}</strong>
+							<strong>{{ Session::get('error') }}</strong>
 						</label>
 					@endif
 				</div>
 			</div>
 
 			<div class="col-md-12 col-lg-12">
-				<div class="form-group text-center">
+				<div class="form-group text-center {{ ( $errors->has('term') ? 'has-error' : '' || $errors->has('mendaftar') ? 'has-error' : '' ) }}">
 					<input type="hidden" name="_token" value="{{ csrf_token() }}">
 					<div class="checkbox">
-					  <label>
-					    <input type="checkbox" name="term" id="term" value="1" required="required"> Saya telah menyetujui <a href="{{ url('term-and-conditions') }}">syarat dan ketentuan</a> yang berlaku untuk activity ini.<br>
+					  <label class="control-label">
+					    <input type="checkbox" name="term" id="term" value="1"> Saya telah menyetujui <a href="{{ url('term-and-conditions') }}">syarat dan ketentuan</a> yang berlaku untuk activity ini.<br>
 					  </label>
 					</div>
 					<div class="checkbox">
-						<label>
-							<input type="checkbox" name="mendaftar" required="required"> Dengan mendaftar dan ikut serta dalam program undian ini, Anda setuju untuk memperbolehkan PT ICI Paints Indonesia untuk mengumpulkan, menggunakan dan mengungkapkan data pribadi Anda untuk pelaksanaan program undian ini dan komunikasi marketing di masa yang akan datang. Untuk informasi lebih lanjut, silakan lihat syarat dan ketentuan.
+						<label class="control-label">
+							<input type="checkbox" name="mendaftar"> Dengan mendaftar dan ikut serta dalam program undian ini, Anda setuju untuk memperbolehkan PT ICI Paints Indonesia untuk mengumpulkan, menggunakan dan mengungkapkan data pribadi Anda untuk pelaksanaan program undian ini dan komunikasi marketing di masa yang akan datang. Untuk informasi lebih lanjut, silakan lihat syarat dan ketentuan.
 						</label>
 					</div>
+					<p class="help-block">
+						<strong class="text-danger">{{ ( $errors->has('term') || $errors->has('mendaftar') ? 'Centang untuk menyetujui' : '' ) }}</strong>
+					</p>
 					<button type="submit" class="button-kirim">
 						<img src="{{ asset('img/kirim-button.png') }}" class="img-responsive" style="margin: auto">
 					</button>
 				</div>
 			</div>
+			</form>
+
+			{{-- Upload form --}}
+			<form id="form1" method="post" enctype="multipart/form-data" action="{{ url('/upload') }}">
+				<input type="file" name="image" id="file1" accept="image/*" style="display: none;">
+				<input type="hidden" name="id" value="1">
+				{{ csrf_field() }}
+			</form>
+			<form id="form2" method="post" enctype="multipart/form-data" action="{{ url('/upload') }}">
+				<input type="file" name="image" id="file2" accept="image/*" style="display: none;">
+				<input type="hidden" name="id" value="2">
+				{{ csrf_field() }}
+			</form>
+			<form id="form3" method="post" enctype="multipart/form-data" action="{{ url('/upload') }}">
+				<input type="file" name="image" id="file3" accept="image/*" style="display: none;">
+				<input type="hidden" name="id" value="3">
+				{{ csrf_field() }}
+			</form>
+			<form id="form4" method="post" enctype="multipart/form-data" action="{{ url('/upload') }}">
+				<input type="file" name="image" id="file4" accept="image/*" style="display: none;">
+				<input type="hidden" name="id" value="4">
+				{{ csrf_field() }}
 			</form>
 		</div>
 	</section>
@@ -237,6 +263,23 @@
 			<img src="{{ asset('img/mekanisme-mobile.png') }}" class="img-responsive visible-xs visible-sm hidden-lg">
 		</div>
 	</section>
+</div>
+
+<div id="start"></div>
+<div id="myModal2" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      </div>
+      <div class="modal-body text-center" style="padding: 25px 10px 0 10px;">
+        <p id="information" style="font-size: 12px; color: #fff">Silahkan periksa file foto agar tidak melebihi ukuran yang telah ditentukan (5 mb). Pastikan koneksi internet anda stabil.</p>
+      </div>
+      <div class="modal-footer" style="text-align: center!important; ">
+        <button type="button" class="btn btn-primary triangle" data-dismiss="modal">Coba lagi</button>
+      </div>
+    </div>
+  </div>
 </div>
 
 @stop
@@ -250,86 +293,186 @@
 
 <script type="text/javascript">
 
-	// upload ========
-	function readURL1(input) {
-	    if (input.files && input.files[0]) {
-	        var reader = new FileReader();
+	$("#btnUpload").click(function() {
+        $("#file1").click();
+    });
 
-	        reader.onload = function (e) {
-	            $('#imgPlaceholder1').attr('src', e.target.result);
-	        }
+    $('#file1').change(function() {
+          var status = $('#status');
+          console.log('start!');
+          $('#form1').ajaxForm({
+              beforeSend: function() {
+                  status.empty();
+              },
+              uploadProgress: function(event, position, total, percentComplete) {
+                  console.log('uploading...');
+                  $('#loader1').css('display','block');
+                  var bd = $('.modal-backdrop');
+                  bd.css('display','block');
+              },
+              complete: function(xhr) {
+                console.log(xhr.responseText.replace(/\"|\\/g, ""));
+                var ct = xhr.getResponseHeader("content-type") || "";
+                if (ct.indexOf('text') > -1) {
+                  //do something
+                  var x = xhr.responseText.replace(/\"|\\/g, "");
+                  var newSrc = $('#imgPlaceholder1').attr('src').replace( $('#imgPlaceholder1').attr('src'), x);
+                  $("#imgPlaceholder1").attr("src", x);
+                  $('#loader1').css('display','none');
+                  var bd = $('.modal-backdrop');
+                  bd.css('display','none');
+                }
+                if (ct.indexOf('json') > -1) {
+                  // handle json here
+                  var x = xhr.responseText.replace(/\"|\\/g, "");
+                  $('#myModal2').modal('show');
+                  $('#information').innerHTML = x;
+                  $('#loader1').css('display','none');
+                  var bd = $('.modal-backdrop');
+                  bd.css('display','none');
+                }
+              }
+          });
 
-	        reader.readAsDataURL(input.files[0]);
-	    }
-	}
+          $('#form1').submit();
+    });
 
-	function readURL2(input) {
-	    if (input.files && input.files[0]) {
-	        var reader = new FileReader();
 
-	        reader.onload = function (e) {
-	            $('#imgPlaceholder2').attr('src', e.target.result);
-	        }
+    $("#btnUpload2").click(function() {
+        $("#file2").click();
+    });
 
-	        reader.readAsDataURL(input.files[0]);
-	    }
-	}
+    $('#file2').change(function() {
+          var status = $('#status');
+          console.log('start!');
+          $('#form2').ajaxForm({
+              beforeSend: function() {
+                  status.empty();
+              },
+              uploadProgress: function(event, position, total, percentComplete) {
+                  console.log('uploading...');
+                  $('#loader2').css('display','block');
+                  var bd = $('.modal-backdrop');
+                  bd.css('display','block');
+              },
+              complete: function(xhr) {
+                console.log(xhr.responseText.replace(/\"|\\/g, ""));
+                var ct = xhr.getResponseHeader("content-type") || "";
+                if (ct.indexOf('text') > -1) {
+                  //do something
+                  var x = xhr.responseText.replace(/\"|\\/g, "");
+                  var newSrc = $('#imgPlaceholder2').attr('src').replace( $('#imgPlaceholder2').attr('src'), x);
+                  $("#imgPlaceholder2").attr("src", x);
+                  $('#loader2').css('display','none');
+                  var bd = $('.modal-backdrop');
+                  bd.css('display','none');
+                }
+                if (ct.indexOf('json') > -1) {
+                  // handle json here
+                  var x = xhr.responseText.replace(/\"|\\/g, "");
+                  $('#myModal2').modal('show');
+                  $('#information').innerHTML = x;
+                  $('#loader2').css('display','none');
+                  var bd = $('.modal-backdrop');
+                  bd.css('display','none');
+                }
+              }
+          });
 
-	function readURL3(input) {
-	    if (input.files && input.files[0]) {
-	        var reader = new FileReader();
+          $('#form2').submit();
+    });
 
-	        reader.onload = function (e) {
-	            $('#imgPlaceholder3').attr('src', e.target.result);
-	        }
 
-	        reader.readAsDataURL(input.files[0]);
-	    }
-	}
 
-	function readURL4(input) {
-	    if (input.files && input.files[0]) {
-	        var reader = new FileReader();
+    $("#btnUpload3").click(function() {
+        $("#file3").click();
+    });
 
-	        reader.onload = function (e) {
-	            $('#imgPlaceholder4').attr('src', e.target.result);
-	        }
+    $('#file3').change(function() {
+          var status = $('#status');
+          console.log('start!');
+          $('#form3').ajaxForm({
+              beforeSend: function() {
+                  status.empty();
+              },
+              uploadProgress: function(event, position, total, percentComplete) {
+                  console.log('uploading...');
+                  $('#loader3').css('display','block');
+                  var bd = $('.modal-backdrop');
+                  bd.css('display','block');
+              },
+              complete: function(xhr) {
+                console.log(xhr.responseText.replace(/\"|\\/g, ""));
+                var ct = xhr.getResponseHeader("content-type") || "";
+                if (ct.indexOf('text') > -1) {
+                  //do something
+                  var x = xhr.responseText.replace(/\"|\\/g, "");
+                  var newSrc = $('#imgPlaceholder3').attr('src').replace( $('#imgPlaceholder3').attr('src'), x);
+                  $("#imgPlaceholder3").attr("src", x);
+                  $('#loader3').css('display','none');
+                  var bd = $('.modal-backdrop');
+                  bd.css('display','none');
+                }
+                if (ct.indexOf('json') > -1) {
+                  // handle json here
+                  var x = xhr.responseText.replace(/\"|\\/g, "");
+                  $('#myModal2').modal('show');
+                  $('#information').innerHTML = x;
+                  $('#loader3').css('display','none');
+                  var bd = $('.modal-backdrop');
+                  bd.css('display','none');
+                }
+              }
+          });
 
-	        reader.readAsDataURL(input.files[0]);
-	    }
-	}
+          $('#form3').submit();
+    });
 
-	$("#file1").change(function(){
-	    readURL1(this);
-	});
 
-	$("#file2").change(function(){
-	    readURL2(this);
-	});
+    $("#btnUpload4").click(function() {
+        $("#file4").click();
+    });
 
-	$("#file3").change(function(){
-	    readURL3(this);
-	});
+    $('#file4').change(function() {
+          var status = $('#status');
+          console.log('start!');
+          $('#form4').ajaxForm({
+              beforeSend: function() {
+                  status.empty();
+              },
+              uploadProgress: function(event, position, total, percentComplete) {
+                  console.log('uploading...');
+                  $('#loader4').css('display','block');
+                  var bd = $('.modal-backdrop');
+                  bd.css('display','block');
+              },
+              complete: function(xhr) {
+                console.log(xhr.responseText.replace(/\"|\\/g, ""));
+                var ct = xhr.getResponseHeader("content-type") || "";
+                if (ct.indexOf('text') > -1) {
+                  //do something
+                  var x = xhr.responseText.replace(/\"|\\/g, "");
+                  var newSrc = $('#imgPlaceholder4').attr('src').replace( $('#imgPlaceholder4').attr('src'), x);
+                  $("#imgPlaceholder4").attr("src", x);
+                  $('#loader4').css('display','none');
+                  var bd = $('.modal-backdrop');
+                  bd.css('display','none');
+                }
+                if (ct.indexOf('json') > -1) {
+                  // handle json here
+                  var x = xhr.responseText.replace(/\"|\\/g, "");
+                  $('#myModal2').modal('show');
+                  $('#information').innerHTML = x;
+                  $('#loader4').css('display','none');
+                  var bd = $('.modal-backdrop');
+                  bd.css('display','none');
+                }
+              }
+          });
 
-	$("#file4").change(function(){
-	    readURL4(this);
-	});
+          $('#form4').submit();
+    });
 
-	$("#uploadBtn1").click(function() {
-	  $("#file1").click();
-	});
-
-	$("#uploadBtn2").click(function() {
-	  $("#file2").click();
-	});
-
-	$("#uploadBtn3").click(function() {
-	  $("#file3").click();
-	});
-
-	$("#uploadBtn4").click(function() {
-	  $("#file4").click();
-	});
 
 
 	$(function() { // Shorthand for $(document).ready(

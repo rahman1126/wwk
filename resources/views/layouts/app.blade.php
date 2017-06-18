@@ -157,6 +157,7 @@
     <!-- Scripts -->
     <script src="{{ asset('js/jquery.min.js') }}"></script>
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('js/jquery-form.js') }}"></script>
     <script>  
 
     $(window).on('load', function(){
@@ -171,6 +172,8 @@
     function closeNav() {
         document.getElementById("mySidenav").style.width = "0";
     }
+
+
     </script>
 
     <script>

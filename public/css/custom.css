@@ -14,6 +14,35 @@ body{
     font-style: normal;
 }
 
+#loader1, #loader2, #loader3, #loader4 {
+    position: absolute;
+    left: 75%;
+    top: 85%;
+    z-index: 1041;
+    margin: -75px 0 0 -75px;
+    border: 16px solid #f3f3f3;
+        border-top-width: 16px;
+        border-top-style: solid;
+        border-top-color: rgb(243, 243, 243);
+    border-radius: 50%;
+    border-top: 16px solid #121ce3;
+    width: 50px;
+    height: 50px;
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+}
+
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+#uploading{ position: relative; }
 .upload-box{
 	background-color: #eee;
 	padding: 5px;

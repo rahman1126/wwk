@@ -22,6 +22,8 @@ Route::post('/download', 'PublicController@startDownload');
 Route::post('/fire-download', 'PublicController@startDownloadNow');
 Route::get('/fire-download', 'PublicController@download');
 
+Route::post('/upload', 'PublicController@upload');
+
 Route::get('/term-and-conditions', 'PublicController@terms');
 
 Route::get('download/facebook', 'PublicController@redirectToProvider');
