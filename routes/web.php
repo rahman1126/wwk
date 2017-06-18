@@ -16,6 +16,7 @@ Route::post('/get-city', 'PublicController@getCity');
 Route::get('/get-city', 'PublicController@index');
 Route::post('/submit', 'PublicController@submit');
 Route::get('/submit', 'PublicController@index');
+Route::get('/upload', 'PublicController@index');
 Route::get('/download', 'PublicController@download');
 Route::get('/download-success', 'PublicController@downloadSuccess');
 Route::post('/download', 'PublicController@startDownload');
